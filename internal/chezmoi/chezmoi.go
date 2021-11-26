@@ -92,6 +92,14 @@ var modeTypeNames = map[fs.FileMode]string{
 	fs.ModeCharDevice: "char device",
 }
 
+// An ExitCodeError indicates the the main program should exit with the given
+// code.
+type ExitCodeError int
+
+func (e ExitCodeError) Error() string {
+	return fmt.Sprintf("exit status %d", int(e))
+}
+
 type inconsistentStateError struct {
 	targetRelPath RelPath
 	origins       []string

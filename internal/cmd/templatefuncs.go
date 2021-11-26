@@ -19,6 +19,11 @@ type ioregData struct {
 	value map[string]interface{}
 }
 
+func (c *Config) exitTemplateFunc(code int) string {
+	returnTemplateError(chezmoi.ExitCodeError(code))
+	return ""
+}
+
 func (c *Config) fromYamlTemplateFunc(str string) interface{} {
 	var result interface{}
 

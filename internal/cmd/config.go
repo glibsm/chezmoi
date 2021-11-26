@@ -414,6 +414,7 @@ func newConfig(options ...configOption) (*Config, error) {
 		"bitwardenFields":          c.bitwardenFieldsTemplateFunc,
 		"decrypt":                  c.decryptTemplateFunc,
 		"encrypt":                  c.encryptTemplateFunc,
+		"exit":                     c.exitTemplateFunc,
 		"fromYaml":                 c.fromYamlTemplateFunc,
 		"gitHubKeys":               c.gitHubKeysTemplateFunc,
 		"gitHubLatestRelease":      c.gitHubLatestReleaseTemplateFunc,
@@ -590,7 +591,7 @@ func (c *Config) applyArgs(
 		}
 	}
 	if keptGoingAfterErr {
-		return ExitCodeError(1)
+		return chezmoi.ExitCodeError(1)
 	}
 
 	return nil
@@ -810,7 +811,7 @@ func (c *Config) defaultPreApplyFunc(
 		case choice == "skip":
 			return chezmoi.Skip
 		case choice == "quit":
-			return ExitCodeError(1)
+			return chezmoi.ExitCodeError(1)
 		default:
 			return nil
 		}
